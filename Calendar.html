@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Calendar</title>
+<link type="text/css" rel="stylesheet" href="css/jquery-ui.structure.min.css">
+<link type="text/css" rel="stylesheet" href="css/jquery-ui.theme.min.css">
+<link type="text/css" rel="stylesheet" href="css/jquery.timepicker.min.css">
+<link type="text/css" rel="stylesheet" href="css/modal.css">
+</head>
+<body>
+
+			
+<div id="calendar"></div>
+
+<div class="window-popup">
+	<div class="wp-content">
+		<h3>Meeting Information</h3>
+		
+ 		<div id="dialog-form" title="New Meeting">
+
+		  <form>
+			<div class="modal-window">
+			  			  
+			  <label for="startdate">Start date:</label>
+			  <input type="text" id="datepicker" class="date">
+			  
+			  <label for="start-time">Start time:</label>
+			  <input type="text" id="start-time" class="time"><br/>
+			  
+			  <label for="enddate">End date:</label>
+			  <input type="text" id="datepickerend" class="date">
+			  
+			  <label for="end-time">End time:</label>
+			  <input type="text" id="end-time" class="time"><br/><br/>
+			  
+			  <label for="to">To:</label>
+			  <input type="text" id="name" class="text ui-widget-content ui-corner-all">
+			  
+			  <label for="subject">Subject:</label>
+			  <input type="text" id="email" class="text ui-widget-content ui-corner-all">
+			  
+			  <label for="location">Location:</label>
+			  <input type="text" id="location" class="text ui-widget-content ui-corner-all">
+		  	   
+			  <!-- Allow form submission with keyboard without duplicating the dialog button -->
+			  <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+			
+		    </div>
+		  </form>
+		  
+		</div>
+	
+			<a href="#" id="button-close">Close</a>
+	</div>
+</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/jquery-ui/jquery-ui.min.js"></script>
+<script src="js/jquery-timepicker/jquery.timepicker.min.js"></script> 
+<script>
+    $('#calendar').datepicker({ 
+        inline: true,
+        firstDay: 0,
+        showOtherMonths: true,
+		selectOtherMonths: true,
+        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+		dateFormat: 'yy-mm-dd',
+        minDate: -0,  /* past date cannot be chosen */
+	    
+		/* when a date is selected */
+		onSelect: function(dateText, inst) { 
+        	/* show the modal window */
+			$(".window-popup").show(),
+			
+			/* chosen date in the start date field */	
+			$('#datepicker').val(dateText),
+			
+			/* chosen date in the end date field */	
+			$('#datepickerend').val(dateText),
+			
+			/* start date in modal */	
+			$( function() {
+				$( "#datepicker" ).datepicker({
+				  dateFormat: 'yy-mm-dd',
+				  showOn: "both",
+				  buttonImage: "images/time.svg",
+				  buttonImageOnly: true,
+				  buttonText: "Select date",
+				  minDate: -0 
+				});
+			}),
+			
+			/* end date in modal */	
+			$( function() {
+				$( "#datepickerend" ).datepicker({
+				  dateFormat: 'yy-mm-dd',
+				  showOn: "both",
+				  buttonImage: "images/time.svg",
+				  buttonImageOnly: true,
+				  buttonText: "Select date",
+				  minDate: -0	
+				});
+			}),
+			
+			/* start time in modal */		
+			$( function() {
+				$('#start-time').timepicker({
+				  timeFormat: 'h:mm p',
+			      interval: 30,
+				  minTime: '7',
+				  maxTime: '11:30pm',
+				  defaultTime: 'now',
+				  startTime: '7:00',
+				  dynamic: false,
+				  dropdown: true,
+				  scrollbar: true
+				});
+			}),	
+			
+			/* end time in modal */		
+			$( function() {
+				$('#end-time').timepicker({
+				  timeFormat: 'h:mm p',
+			      interval: 30,
+				  minTime: '7',
+				  maxTime: '11:30pm',
+				  defaultTime: 'now',
+				  startTime: '7:00',
+				  dynamic: false,
+				  dropdown: true,
+				  scrollbar: true
+				});
+			}),		
+			
+       /* the close button on the modal */
+		$("#button-close").click(function()	{
+			$(".window-popup").hide(300);
+		});
+			
+		}	/* end onSelect */
+	
+    });   /* End $('#calendar').datepicker({ */
+	
+	
+</script>
+</body>
+</html>
