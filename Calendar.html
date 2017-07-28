@@ -7,6 +7,7 @@
 <link type="text/css" rel="stylesheet" href="css/jquery-ui.theme.min.css">
 <link type="text/css" rel="stylesheet" href="css/modal.css">
 <link type="text/css" rel="stylesheet" href="css/calendar.css">
+<link type="text/css" rel="stylesheet" href="js/jquery-timepicker/jquery.timepicker.min.css">
 </head>
 <body>
 
@@ -57,6 +58,7 @@
 
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/jquery-ui/jquery-ui.min.js"></script>
+<script src="js/jquery-timepicker/jquery.timepicker.min.js"></script>
 <script>
     $('#calendar').datepicker({ 
         inline: true,
@@ -86,7 +88,10 @@
 				  buttonImage: "images/time.svg",
 				  buttonImageOnly: true,
 				  buttonText: "Select date",
-				  minDate: -0 
+				  minDate: -0,
+				  onSelect: function() {
+                    $('#datepickerend').datepicker('option', 'minDate', $(this).val());                        
+                  }	
 				});
 			}),
 			
@@ -109,11 +114,15 @@
 			      interval: 30,
 				  minTime: '7',
 				  maxTime: '11:30pm',
-				  defaultTime: 'now',
 				  startTime: '7:00',
 				  dynamic: false,
 				  dropdown: true,
-				  scrollbar: true
+				  scrollbar: true,
+				  change: function() {
+					   	var startTime = $('#start-time').timepicker('getTime');    
+					  	var endTime = new Date(startTime.getTime() + 30*60000);   // add 30 minutes
+					  	$('#end-time').timepicker('setTime', endTime);			  	
+				  }	
 				});
 			}),	
 			
@@ -124,7 +133,6 @@
 			      interval: 30,
 				  minTime: '7',
 				  maxTime: '11:30pm',
-				  defaultTime: 'now',
 				  startTime: '7:00',
 				  dynamic: false,
 				  dropdown: true,
