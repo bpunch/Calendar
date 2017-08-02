@@ -89,9 +89,10 @@
 				  buttonImageOnly: true,
 				  buttonText: "Select date",
 				  minDate: -0,
-				  onSelect: function() {
-                    $('#datepickerend').datepicker('option', 'minDate', $(this).val());                        
-                  }	
+				  onSelect: function (start_date, el) { 
+        	      /*show the modal window*/
+			      $( '#datepickerend' ).val(start_date);
+				  }
 				});
 			}),
 			
