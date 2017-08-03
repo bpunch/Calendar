@@ -24,16 +24,16 @@
 			<div class="modal-window">
 			  			  
 			  <label for="startdate">Start date:</label>
-			  <input type="text" id="datepicker" class="date">
+			  <input type="text" id="datepicker" class="date" readonly>
 			  
 			  <label for="start-time">Start time:</label>
-			  <input type="text" id="start-time" class="time"><br/>
+			  <input type="text" id="start-time" class="time" readonly><br/>
 			  
 			  <label for="enddate">End date:</label>
-			  <input type="text" id="datepickerend" class="date">
+			  <input type="text" id="datepickerend" class="date" readonly>
 			  
 			  <label for="end-time">End time:</label>
-			  <input type="text" id="end-time" class="time"><br/><br/>
+			  <input type="text" id="end-time" class="time" readonly><br/><br/>
 			  
 			  <label for="to">To:</label>
 			  <input type="text" id="name" class="text ui-widget-content ui-corner-all">
@@ -60,7 +60,9 @@
 <script src="js/jquery-ui/jquery-ui.min.js"></script>
 <script src="js/jquery-timepicker/jquery.timepicker.min.js"></script>
 <script>
-    $('#calendar').datepicker({ 
+$(document).ready(function(){
+	
+	$('#calendar').datepicker({ 
         inline: true,
         firstDay: 0,
         showOtherMonths: true,
@@ -81,35 +83,33 @@
 			$('#datepickerend').val(dateText),
 			
 			/* start date in modal */	
-			$( function() {
-				$( "#datepicker" ).datepicker({
+			$( "#datepicker" ).datepicker({
 				  dateFormat: 'yy-mm-dd',
 				  showOn: "both",
 				  buttonImage: "images/time.svg",
 				  buttonImageOnly: true,
 				  buttonText: "Select date",
 				  minDate: -0,
-				  onSelect: function (start_date, el) { 
-			      $( '#datepickerend' ).val(start_date);
+				  onSelect: function (selected) {  
+				  $("#datepickerend").datepicker("option","minDate", selected)
 				  }
-				});
-			}),
+			});
 			
 			/* end date in modal */	
-			$( function() {
-				$( "#datepickerend" ).datepicker({
+			$( "#datepickerend" ).datepicker({
 				  dateFormat: 'yy-mm-dd',
 				  showOn: "both",
 				  buttonImage: "images/time.svg",
 				  buttonImageOnly: true,
 				  buttonText: "Select date",
-				  minDate: -0	
+				  minDate: -0,
+				  onSelect: function(selected) {  
+				  $("#datepicker").datepicker("option","setDate", selected)
+				  }	
 				});
-			}),
 			
 			/* start time in modal */		
-			$( function() {
-				$('#start-time').timepicker({
+			$('#start-time').timepicker({
 				  timeFormat: 'h:mm p',
 			      interval: 30,
 				  minTime: '7',
@@ -123,12 +123,10 @@
 					  	var endTime = new Date(startTime.getTime() + 30*60000);   // add 30 minutes
 					  	$('#end-time').timepicker('setTime', endTime);			  	
 				  }	
-				});
-			}),	
+			});
 			
-			/* end time in modal */		
-			$( function() {
-				$('#end-time').timepicker({
+			/* end time in modal */	
+			$('#end-time').timepicker({
 				  timeFormat: 'h:mm p',
 			      interval: 30,
 				  minTime: '7',
@@ -136,19 +134,28 @@
 				  startTime: '7:00',
 				  dynamic: false,
 				  dropdown: true,
-				  scrollbar: true
-				});
-			}),		
-			
-       /* the close button on the modal */
-		$("#button-close").click(function()	{
-			$(".window-popup").hide(300);
-		});
-			
-		}	/* end onSelect */
+				  scrollbar: true,
+				  change: function() {
+				 	var startTime = $('#start-time').timepicker('getTime');  
+					var endTime = $('#end-time').timepicker('getTime'); 
+						if(startTime >= endTime){                                     
+						alert("End time must occur after the selected start time")
+							var endTime = new Date(startTime.getTime() + 30*60000);   // add 30 minutes
+					  	  	$('#end-time').timepicker('setTime', endTime);	
+				  		};
+				  	}
+			});
 	
+		    /* the close button on the modal */
+			$("#button-close").click(function()	{
+				$(".window-popup").hide(300);
+			});
+
+		}	/* end calendar onSelect */
+
     });   /* End $('#calendar').datepicker({ */
-	
+
+});	/* end doc ready */	
 	
 </script>
 </body>
