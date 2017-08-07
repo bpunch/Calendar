@@ -15,7 +15,7 @@
 <div id="calendar"></div>
 
 <div class="window-popup">
-	<div class="wp-content">
+	<div class="window-content">
 		<h3>Meeting Information</h3>
 		
  		<div id="dialog-form" title="New Meeting">
@@ -35,13 +35,13 @@
 			  <label for="end-time">End time:</label>
 			  <input type="text" id="end-time" class="time" readonly><br/><br/>
 			  
-			  <label for="to">To:</label>
-			  <input type="text" id="name" class="text ui-widget-content ui-corner-all">
+			  <label for="to">To:</label><br />
+			  <input type="text" id="name" class="text ui-widget-content ui-corner-all"><br/>
 			  
-			  <label for="subject">Subject:</label>
-			  <input type="text" id="email" class="text ui-widget-content ui-corner-all">
+			  <label for="subject">Subject:</label><br />
+			  <input type="text" id="email" class="text ui-widget-content ui-corner-all"><br/>
 			  
-			  <label for="location">Location:</label>
+			  <label for="location">Location:</label><br />
 			  <input type="text" id="location" class="text ui-widget-content ui-corner-all">
 		  	   
 			  <!-- Allow form submission with keyboard without duplicating the dialog button -->
@@ -148,7 +148,7 @@ $(document).ready(function(){
 	
 		    /* the close button on the modal */
 			$("#button-close").click(function()	{
-				$(".window-popup").hide(300);
+				$(".window-popup").hide(100);
 			});
 
 		}	/* end calendar onSelect */
