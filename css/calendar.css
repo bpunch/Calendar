@@ -16,12 +16,15 @@
 }
 
 .ui-datepicker .ui-datepicker-header {
-	padding: 2px 0;
+	padding: 0;
 	background: #0062E6; 
 	border: none;
 }
 
 .ui-datepicker .ui-datepicker-title {
+	margin: 0;
+    line-height: 30px;
+    text-align: center;
 	color: #fff;
 }
 
@@ -37,14 +40,14 @@
 	text-transform: uppercase;
 }
 
-.ui-datepicker td span,
-.ui-datepicker td a {
+#calendar .ui-datepicker td span,
+#calendar .ui-datepicker td a {
 	height: 72px;
 }
 
 .ui-widget.ui-widget-content {
-	width: 97%;
-	margin: 14px auto;
+	width: auto;
+	margin: 14px;
 	background: #F4F7F9;
 	border: 1px solid #AED8ED;
 }
@@ -54,8 +57,8 @@
 .ui-datepicker .ui-datepicker-prev:hover,
 .ui-datepicker .ui-datepicker-next,
 .ui-datepicker .ui-datepicker-next:hover {
-	width: 2em;
-	height: 2em;
+	width: 30px;
+	height: 30px;
 	border: none;
 	top: 0;
 	right: 0;
@@ -66,6 +69,19 @@
 	left: 0;
 }
 
+.ui-datepicker .ui-datepicker-prev:hover,
+.ui-datepicker .ui-datepicker-next:hover {
+	background: rgba(255, 255, 255, 0.25);
+}
+
+.ui-datepicker .ui-datepicker-prev span, 
+.ui-datepicker .ui-datepicker-next span {
+	margin: 5px 0 0 0;
+	line-height: 20px;
+	position: static;
+}
+
+
 .ui-state-default, 
 .ui-widget-content .ui-state-default, 
 .ui-widget-header .ui-state-default, 
@@ -74,6 +90,7 @@ html .ui-button.ui-state-disabled:hover,
 html .ui-button.ui-state-disabled:active {
 	color: #0062E6;
 	background: #fff;
+	border: 1px solid #AED8ED;
 }
 
 .ui-state-hover, 
@@ -103,3 +120,15 @@ html .ui-button.ui-state-disabled:active {
 }
 
 
+/* Icons */
+.ui-icon {
+	background: url('../images/icon-chevron.svg') 0 0 no-repeat;
+}
+.ui-icon-circle-triangle-e {
+	background-position: 4px -1px;
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+.ui-icon-circle-triangle-w {
+	background-position: 4px 0;
+}
