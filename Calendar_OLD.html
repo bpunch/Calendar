@@ -4,40 +4,56 @@
 <meta charset="UTF-8">
 <title>Calendar</title>
 <link type="text/css" rel="stylesheet" href="css/jquery-ui.structure.min.css">
-<link type="text/css" rel="stylesheet" href="css/jquery.timepicker.min.css">
+<link type="text/css" rel="stylesheet" href="css/modal.css">
 <link type="text/css" rel="stylesheet" href="css/calendar.css">
+<link type="text/css" rel="stylesheet" href="css/jquery.timepicker.min.css">
 </head>
 <body>
 
 			
-<div id="calendar">
-	<!-- Form BEGIN -->
-	<div class="meeting-form" title="New Meeting">
-		<h2 class="meeting-header">New meeting</h2>
-		<form>
-			<div class="date-time-wrapper">
-				<div>
-					<label class="fixed-lbl" for="startdate">Start date</label> <input type="text" id="datepicker" class="date spacing-r" readonly><br />
-					<label class="fixed-lbl" for="enddate">End date</label> <input type="text" id="datepickerend" class="date spacing-r" readonly>
-				</div>
-				<div>
-					<label class="fixed-lbl" for="start-time">Start time</label> <input type="text" id="start-time" class="time" readonly><br/>
-					<label class="fixed-lbl" for="end-time">End time</label> <input type="text" id="end-time" class="time" readonly>
-				</div>
-			</div>
-			<label for="to">To</label><br />
-			<input type="text" id="name" class="text ui-widget-content ui-corner-all"><br/>
-			<label for="subject">Subject</label><br />
-			<input type="text" id="email" class="text ui-widget-content ui-corner-all"><br/>
-			<label for="location">Location</label><br />
-			<input type="text" id="location" class="text ui-widget-content ui-corner-all"><br />
-			<!-- <input type="submit" tabindex="-1"> -->
-		</form>
-		<h2 class="meeting-footer"><img src="images/icon-chevron-blue.svg" width="16" height="16" alt="Back to calendar" /><span class="back-to-calendar">Back to calendar</span></h2>
-	</div>
-	<!-- Form END -->
-</div>
+<div id="calendar"></div>
 
+<div class="window-popup">
+	<div class="window-content">
+		<h3>Meeting Information</h3>
+		
+ 		<div id="dialog-form" title="New Meeting">
+
+		  <form>
+			<div class="modal-window">
+			  			  
+			  <label for="startdate">Start date:</label>
+			  <input type="text" id="datepicker" class="date" readonly>
+			  
+			  <label for="start-time">Start time:</label>
+			  <input type="text" id="start-time" class="time" readonly><br/>
+			  
+			  <label for="enddate">End date:</label>
+			  <input type="text" id="datepickerend" class="date" readonly>
+			  
+			  <label for="end-time">End time:</label>
+			  <input type="text" id="end-time" class="time" readonly><br/><br/>
+			  
+			  <label for="to">To:</label><br />
+			  <input type="text" id="name" class="text ui-widget-content ui-corner-all"><br/>
+			  
+			  <label for="subject">Subject:</label><br />
+			  <input type="text" id="email" class="text ui-widget-content ui-corner-all"><br/>
+			  
+			  <label for="location">Location:</label><br />
+			  <input type="text" id="location" class="text ui-widget-content ui-corner-all">
+		  	   
+			  <!-- Allow form submission with keyboard without duplicating the dialog button -->
+			  <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+			
+		    </div>
+		  </form>
+		  
+		</div>
+	
+			<a href="#" id="button-close">Close</a>
+	</div>
+</div>
 
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
@@ -56,8 +72,8 @@ $(document).ready(function(){
 	    
 		/* when a date is selected */
 		onSelect: function(dateText, inst) { 
-			/* Show form div */
-			$('.meeting-form').show();
+        	/* show the modal window */
+			$(".window-popup").show(),
 			
 			/* chosen date in the start date field */	
 			$('#datepicker').val(dateText),
@@ -69,7 +85,7 @@ $(document).ready(function(){
 			$( "#datepicker" ).datepicker({
 				  dateFormat: 'yy-mm-dd',
 				  showOn: "both",
-				  buttonImage: "images/icon-calendar.svg",
+				  buttonImage: "images/time.svg",
 				  buttonImageOnly: true,
 				  buttonText: "Select date",
 				  minDate: -0,
@@ -82,7 +98,7 @@ $(document).ready(function(){
 			$( "#datepickerend" ).datepicker({
 				  dateFormat: 'yy-mm-dd',
 				  showOn: "both",
-				  buttonImage: "images/icon-calendar.svg",
+				  buttonImage: "images/time.svg",
 				  buttonImageOnly: true,
 				  buttonText: "Select date",
 				  minDate: -0,
@@ -128,14 +144,15 @@ $(document).ready(function(){
 				  		};
 				  	}
 			});
+	
+		    /* the close button on the modal */
+			$("#button-close").click(function()	{
+				$(".window-popup").hide(100);
+			});
 
 		}	/* end calendar onSelect */
 
     });   /* End $('#calendar').datepicker({ */
-
-    $('.back-to-calendar').click(function() {
-  		$('.meeting-form').hide();
-	});
 
 });	/* end doc ready */	
 	

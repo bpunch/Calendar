@@ -1,4 +1,45 @@
 /* Calendar formatting */
+body {
+	margin: 0;
+	padding: 0;
+	font-family: OpenSans,sans-serif;
+}
+#calendar {
+	position: relative;
+	z-index: 1;
+}
+
+h2.meeting-header,
+h2.meeting-footer  {
+	margin: 0;
+	padding: 12px 14px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    line-height: 1.4;
+}
+h2.meeting-header {
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+h2.meeting-footer {
+	width: 100%;
+    border-top: 1px solid rgb(204, 204, 204);
+    position: absolute;
+    bottom: 0;
+}
+.meeting-footer span {
+	font-size: 13px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #0062E6;
+	cursor: pointer;
+}
+.meeting-footer img {
+	width: 16px;
+	margin-right: 7px;
+	vertical-align: middle;
+}
+
 .ui-corner-all {
 	border-radius: 0;
 }
@@ -47,7 +88,6 @@
 
 .ui-widget.ui-widget-content {
 	width: auto;
-	margin: 14px;
 	background: #F4F7F9;
 	border: 1px solid #AED8ED;
 }
@@ -119,6 +159,63 @@ html .ui-button.ui-state-disabled:active {
 	opacity: 0.25;
 }
 
+/* Form */
+.meeting-form {
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	position: absolute;
+	z-index: 10;
+	background: #F2F6F8;
+	border: 1px solid #AED8ED;
+	display: none;
+}
+.meeting-form img.ui-datepicker-trigger {
+	width: 16px;
+	height: 17px;
+	margin: 7px 0 0 -37px;
+	position: absolute;
+}
+.meeting-form form {
+	padding: 14px;
+}
+.meeting-form label {
+	font-size: 13px;
+	color: rgba(0, 0, 0, 0.55);
+}
+.meeting-form label.fixed-lbl {
+	width: 65px;
+	display: inline-block;
+}
+.meeting-form input.text { 
+	width: 98%;
+	margin-bottom: 14px;
+}
+.meeting-form input[type="text"] {
+    margin-bottom: 7px;
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+    font-weight: normal;
+    text-transform: none;
+    background-image: none;
+    background-color: rgb(255, 255, 255);
+    min-height: 28px;
+    line-height: 28px;
+    text-decoration: inherit;
+    padding: 1px 3px;
+    border-radius: 2px;
+    transition: all 0.2s ease-out;
+    border: 1px solid rgb(204, 204, 204);
+}
+.meeting-form .ui-datepicker-trigger,
+.meeting-form .date,
+.meeting-form .time {
+	cursor: pointer;
+}
+.meeting-form .date-time-wrapper {
+	display: flex;
+	flex-flow: row wrap;
+}
 
 /* Icons */
 .ui-icon {
@@ -131,4 +228,29 @@ html .ui-button.ui-state-disabled:active {
 }
 .ui-icon-circle-triangle-w {
 	background-position: 4px 0;
+}
+
+/* Helper classes */
+.spacing-r {
+	margin-right: 14px;
+}
+
+/* Datpicker overrides */
+.ui-timepicker-standard {
+	font-family: OpenSans, sans-serif;
+	border: 1px solid #CCC;
+	font-size: 14px;
+}
+.ui-timepicker-standard a {
+	padding: 1px;
+	color: #000;
+}
+.ui-timepicker-standard .ui-widget.ui-widget-content {
+	border: none;
+	background: transparent;
+}
+.ui-timepicker-standard .ui-state-hover {
+	border: 1px solid #F2F3F4;
+	background: #F2F3F4;
+	color: #0062E6;
 }
