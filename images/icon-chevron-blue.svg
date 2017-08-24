@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="443 515 16 17">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #0062e6;
+        font-size: 16px;
+        font-family: pega-designers;
+      }
+    </style>
+  </defs>
+  <text id="icon-chevron" class="cls-1" transform="translate(459 516) rotate(180)"><tspan x="0" y="0">m</tspan></text>
+</svg>
